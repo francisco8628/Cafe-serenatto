@@ -1,14 +1,37 @@
 <?php
 
 require 'src/conexao-bd.php';
+require 'src/Model/Produto.php';
 
 $sql1 = "SELECT * FROM produtos WHERE tipo = 'cafe'";
 $statement = $pdo->query($sql1);
 $podutosCafe = $statement->fetchAll(PDO::FETCH_ASSOC); // retorna um array associativo
 
+$dadosCafe = array_map(function ($produto) {
+    return new Produto(
+        $produto['id'],
+        $produto['nome'],
+        $produto['descricao'],
+        $produto['imagem'],
+        $produto['tipo'],
+        $produto['preco']
+    );
+}, $podutosCafe);
+
 $sql2 = "SELECT * FROM produtos WHERE tipo = 'almoco'";
 $statement = $pdo->query($sql2);
 $podutosAumoco = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$dadosAlmoco = array_map(function ($produto) {
+    return new Produto(
+        $produto['id'],
+        $produto['nome'],
+        $produto['descricao'],
+        $produto['imagem'],
+        $produto['tipo'],
+        $produto['preco']
+    );
+}, $podutosAumoco);
 
 ?>
 
@@ -45,19 +68,19 @@ $podutosAumoco = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
             </div>
             <div class="container-cafe-manha-produtos">
-                <?php foreach ($podutosCafe as $cafe): ?>
+                <?php foreach ($dadosCafe as $cafe): ?>
                     <div class="container-produto">
                         <div class="container-foto">
-                            <img src="<?= "img/" . $cafe['imagem']; ?>">
+                            <img src="<?= $cafe->getImagemCaminho(); ?>">
                         </div>
                         <p>
-                            <?= $cafe['nome']; ?>
+                            <?= $cafe-> getNome(); ?>
                         </p>
                         <p>
-                            <?= $cafe['descricao']; ?>
+                            <?= $cafe-> getDescricao(); ?>
                         </p>
                         <p>
-                            <?= "R$ " . $cafe['preco']; ?>
+                            <?= $cafe-> getPrecoFormatado(); ?>
                         </p>
                     </div>
                 <?php endforeach; ?>
@@ -69,19 +92,19 @@ $podutosAumoco = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
             </div>
             <div class="container-almoco-produtos">
-                <?php foreach ($podutosAumoco as $almoco): ?>
+                <?php foreach ($dadosAlmoco as $almoco): ?>
                     <div class="container-produto">
                         <div class="container-foto">
-                            <img src="<?= "img/" . $almoco['imagem']; ?>">
+                            <img src="<?=  $almoco -> getImagemCaminho() ?>">
                         </div>
                         <p>
-                            <?= $almoco['nome']; ?>
+                            <?= $almoco-> getNome(); ?>
                         </p>
                         <p>
-                            <?= $almoco['descricao']; ?>
+                            <?= $almoco -> getDescricao(); ?>
                         </p>
                         <p>
-                            <?= "R$ " . $almoco['preco']; ?>
+                            <?= $almoco -> getPrecoFormatado()?>
                         </p>
                     </div>
                 <?php endforeach; ?>
