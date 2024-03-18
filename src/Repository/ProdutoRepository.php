@@ -47,4 +47,12 @@ class ProdutoRepository
             );
         }, $produtos);
     }
+
+    public function deleteProduto(int $id): void
+    {
+        $sql = "DELETE FROM produtos WHERE id = :id";
+        $stmt = $this->conexao->prepare($sql); 
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+    }
 }
