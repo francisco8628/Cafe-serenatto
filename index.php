@@ -2,37 +2,11 @@
 
 require 'src/conexao-bd.php';
 require 'src/Model/Produto.php';
+require 'src/Repository/ProdutoRepository.php';
 
-$sql1 = "SELECT * FROM produtos WHERE tipo = 'cafe'";
-$statement = $pdo->query($sql1);
-$podutosCafe = $statement->fetchAll(PDO::FETCH_ASSOC); // retorna um array associativo
-
-$dadosCafe = array_map(function ($produto) {
-    return new Produto(
-        $produto['id'],
-        $produto['nome'],
-        $produto['descricao'],
-        $produto['imagem'],
-        $produto['tipo'],
-        $produto['preco']
-    );
-}, $podutosCafe);
-
-$sql2 = "SELECT * FROM produtos WHERE tipo = 'almoco'";
-$statement = $pdo->query($sql2);
-$podutosAumoco = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-$dadosAlmoco = array_map(function ($produto) {
-    return new Produto(
-        $produto['id'],
-        $produto['nome'],
-        $produto['descricao'],
-        $produto['imagem'],
-        $produto['tipo'],
-        $produto['preco']
-    );
-}, $podutosAumoco);
-
+$prodotoRepository = new ProdutoRepository($pdo);
+$dadosCafe = $prodotoRepository-> buscarProdutos('cafe');
+$dadosAlmoco = $prodotoRepository-> buscarProdutos('almoco');
 ?>
 
 <!doctype html>
