@@ -22,3 +22,7 @@ INSERT INTO `serenatto`.`produtos` (`tipo`, `nome`, `descricao`, `imagem`, `prec
 INSERT INTO `serenatto`.`produtos` (`tipo`, `nome`, `descricao`, `imagem`, `preco`) VALUES ('Almoço', 'Filé de peixe', 'Filé de peixe salmão assado, arroz, feijão verde e tomate.', 'prato-peixe.jpg', '24.99');
 INSERT INTO `serenatto`.`produtos` (`tipo`, `nome`, `descricao`, `imagem`, `preco`) VALUES ('Almoço', 'Frango', 'Saboroso frango à milanesa com batatas fritas, salada de repolho e molho picante', 'prato-frango.jpg', '23.00');
 INSERT INTO `serenatto`.`produtos` (`tipo`, `nome`, `descricao`, `imagem`, `preco`) VALUES ('Almoço', 'Fettuccine', 'Prato italiano autêntico da massa do fettuccine com peito de frango grelhado', 'fettuccine.jpg', '22.50');
+
+// uteis
+var_dump($podutosCafe); // para mostrar os dados
+exit(); // para sair

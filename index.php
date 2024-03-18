@@ -1,58 +1,14 @@
 <?php
-$podutosCafe = [
-    [
-        'nome' => 'Café Cremoso',
-        'descricao' => 'Café cremoso irresistivelmente suave e que envolve seu paladar',
-        'preco' => 5.00,
-        'foto' => 'img/cafe-cremoso.jpg'
-    ],
-    [
-        'nome' => 'Café com Leite',
-        'descricao' => 'Café com leite cremoso e saboroso',
-        'preco' => 6.00,
-        'foto' => 'img/cafe-com-leite.jpg'
-    ],
-    [
-        'nome' => 'Café Expresso',
-        'descricao' => 'Café expresso com sabor intenso e marcante',
-        'preco' => 4.00,
-        'foto' => 'img/cafe-expresso.jpg'
-    ],
-    [
-        'nome' => 'Café com Canela',
-        'descricao' => 'Café com canela e leite cremoso',
-        'preco' => 6.00,
-        'foto' => 'img/cafe-com-canela.jpg'
-    ]
-];
 
-$podutosAumoco = [
-    [
-        'nome' => 'Bife',
-        'descricao' => 'Bife, arroz com feijão e uma deliciosa batata frita',
-        'preco' => 27.90,
-        'foto' => 'img/bife.jpg'
-    ],
-    [
-        'nome' => 'Filé de peixe',
-        'descricao' => 'Filé de peixe salmão assado, arroz, feijão verde e tomate.',
-        'preco' => 24.99,
-        'foto' => 'img/prato-peixe.jpg'
-    ],
-    [
-        'nome' => 'Frango',
-        'descricao' => 'Saboroso frango à milanesa com batatas fritas, salada de repolho e molho picante',
-        'preco' => 23.00,
-        'foto' => 'img/prato-frango.jpg'
-    ],
-    [
-        'nome' => 'Fettuccine',
-        'descricao' => 'Prato italiano autêntico da massa do fettuccine com peito de frango grelhado',
-        'preco' => 22.50,
-        'foto' => 'img/fettuccine.jpg'
-    ]
-];
+require 'src/conexao-bd.php';
 
+$sql1 = "SELECT * FROM produtos WHERE tipo = 'cafe'";
+$statement = $pdo->query($sql1);
+$podutosCafe = $statement->fetchAll(PDO::FETCH_ASSOC); // retorna um array associativo
+
+$sql2 = "SELECT * FROM produtos WHERE tipo = 'almoco'";
+$statement = $pdo->query($sql2);
+$podutosAumoco = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -92,7 +48,7 @@ $podutosAumoco = [
                 <?php foreach ($podutosCafe as $cafe): ?>
                     <div class="container-produto">
                         <div class="container-foto">
-                            <img src="<?= $cafe['foto']; ?>">
+                            <img src="<?= "img/" . $cafe['imagem']; ?>">
                         </div>
                         <p>
                             <?= $cafe['nome']; ?>
@@ -116,7 +72,7 @@ $podutosAumoco = [
                 <?php foreach ($podutosAumoco as $almoco): ?>
                     <div class="container-produto">
                         <div class="container-foto">
-                            <img src="<?= $almoco['foto']; ?>">
+                            <img src="<?= "img/" . $almoco['imagem']; ?>">
                         </div>
                         <p>
                             <?= $almoco['nome']; ?>
