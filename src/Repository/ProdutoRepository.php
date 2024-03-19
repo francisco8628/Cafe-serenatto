@@ -22,9 +22,9 @@ class ProdutoRepository
                 $produto['id'],
                 $produto['nome'],
                 $produto['descricao'],
-                $produto['imagem'],
                 $produto['tipo'],
-                $produto['preco']
+                $produto['preco'],
+                $produto['imagem'],
             );
         }, $produtos);
     }
@@ -41,9 +41,9 @@ class ProdutoRepository
                 $produto['id'],
                 $produto['nome'],
                 $produto['descricao'],
-                $produto['imagem'],
                 $produto['tipo'],
-                $produto['preco']
+                $produto['preco'],
+                $produto['imagem'],
             );
         }, $produtos);
     }
@@ -53,6 +53,18 @@ class ProdutoRepository
         $sql = "DELETE FROM produtos WHERE id = :id";
         $stmt = $this->conexao->prepare($sql); 
         $stmt->bindValue(":id", $id);
+        $stmt->execute();
+    }
+
+    public function salvarProduto(Produto $produto): void
+    {
+        $sql = "INSERT INTO produtos (nome, descricao, imagem, tipo, preco) VALUES (:nome, :descricao, :imagem, :tipo, :preco)";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(":nome", $produto->getNome());
+        $stmt->bindValue(":descricao", $produto->getDescricao());
+        $stmt->bindValue(":imagem", $produto->getImagem());
+        $stmt->bindValue(":tipo", $produto->getTipo());
+        $stmt->bindValue(":preco", $produto->getPreco());
         $stmt->execute();
     }
 }
