@@ -363,7 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #ignora a pasta img
-
+img/
 
 
 
