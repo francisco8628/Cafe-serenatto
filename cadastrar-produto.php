@@ -11,8 +11,13 @@ if (isset($_POST['cadastro'])) {
         $_POST['descricao'],
         $_POST['tipo'],      
         $_POST['preco']      
-    );
+    );  
     
+    if(isset($_FILES['imagem'])){
+        $produto->setImagem(uniqid().$_FILES['imagem']['name']);        
+        move_uploaded_file($_FILES['imagem']['tmp_name'], $produto->getImagemCaminho());
+    }        
+        
     $produtoRepository = new ProdutoRepository($pdo);
     $produtoRepository->salvarProduto($produto);
     header('Location: admin.php');

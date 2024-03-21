@@ -3,7 +3,7 @@
 class Produto
 {
     // constructor em PHP é uma função que é chamada automaticamente quando um objeto é criado a partir de uma classe.
-    public function __construct(?int $id, string $nome, string $descricao, string $tipo, float $preco, string $imagem = "default.jpg") 
+    public function __construct(?int $id, string $nome, string $descricao, string $tipo, float $preco, string $imagem = "logo-serenato.png")
     {
         $this->id = $id;
         $this->nome = $nome;
@@ -56,9 +56,19 @@ class Produto
     {
         return "R$ " . number_format($this->preco, 2, ',', '.');
     }
-    
+
+    public function getPrecoFloat(): string
+    {
+        return number_format($this->preco, 2);
+    }
+
     public function getImagemCaminho(): string
     {
         return "img/" . $this->imagem;
+    }
+
+    public function setImagem(string $imagem): void
+    {
+        $this->imagem = $imagem;
     }
 }
